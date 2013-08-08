@@ -1,0 +1,15 @@
+{
+    "contents" : "exportPattern(\"^[[:alpha:]]+\")\n\nimport(XLConnect)\nimport(gWidgets)\nimport(gWidgetstcltk)\n\n\n\n",
+    "created" : 1362518964138.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "466455759",
+    "id" : "DA189F70",
+    "lastKnownWriteTime" : 1362493714,
+    "path" : "C:/Users/LeugimSan/Dropbox/Programacion_SCORES/cvrcalc/cvrcalc/NAMESPACE",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_namespace"
+}

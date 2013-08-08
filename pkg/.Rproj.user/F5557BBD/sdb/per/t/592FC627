@@ -1,0 +1,15 @@
+{
+    "contents" : "Package: cvrcalc\nType: Package\nTitle: Cardiovascular Risk Calculator\nVersion: 1.0\nDate: 2013-03-05\nAuthor: Maria Teresa Seoane Pillado and Miguel Angel Rodriguez Muinos\nMaintainer: M. A. Rodriguez Muinos <mail@leugimsan.es>\nDescription: A cardiovascular risk calculator by scores\nDepends: R (>= 2.10.0), XLConnect, gWidgets, gWidgetstcltk\nLicense: GPL-2\n",
+    "created" : 1362518960657.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3948470066",
+    "id" : "592FC627",
+    "lastKnownWriteTime" : 1362494802,
+    "path" : "C:/Users/LeugimSan/Dropbox/Programacion_SCORES/cvrcalc/cvrcalc/DESCRIPTION",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "dcf"
+}

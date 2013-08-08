@@ -1,0 +1,10 @@
+Package: cvrcalc
+Type: Package
+Title: Cardiovascular Risk Calculator
+Version: 1.0
+Date: 2013-02-13
+Author: Maria Teresa Seoane Pillado and Miguel Angel Rodriguez Muinos
+Maintainer: M. A. Rodriguez Muinos <mail@leugimsan.es>
+Description: A cardiovascular risk calculator by scores
+Depends: R (>= 2.10.0), XLConnect, gWidgets, gWidgetstcltk
+License: GPL-2
