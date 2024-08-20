@@ -6,7 +6,7 @@ GUI for the cvrcalc package
 }
 \description{
 A concise (1-5 lines) description of what the function does.
-cvrclac_gui() es una función que llama a un entorno 
+cvrclac_gui() es una funciÃ³n que llama a un entorno 
 }
 \usage{
 cvrcalc_gui()

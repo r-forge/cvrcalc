@@ -1,8 +1,8 @@
 Package: cvrcalc
 Type: Package
 Title: Cardiovascular Risk Calculator
-Version: 1.0
-Date: 2013-02-13
+Version: 3.0
+Date: 2024-08-20
 Author: Maria Teresa Seoane Pillado and Miguel Angel Rodriguez Muinos
 Maintainer: M. A. Rodriguez Muinos <mail@leugimsan.es>
 Description: A cardiovascular risk calculator by scores
