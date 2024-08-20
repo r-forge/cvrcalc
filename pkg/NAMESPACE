@@ -3,6 +3,3 @@ exportPattern("^[[:alpha:]]+")
 import(XLConnect)
 import(gWidgets2)
 import(gWidgets2tcltk)
-
-
-
