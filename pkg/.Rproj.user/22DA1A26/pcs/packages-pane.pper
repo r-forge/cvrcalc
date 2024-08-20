@@ -1,0 +1,7 @@
+{
+    "installOptions": {
+        "installFromRepository": true,
+        "libraryPath": "C:/Users/leugi/_APLICA/BioStatFLOSS/R/library",
+        "installDependencies": true
+    }
+}
