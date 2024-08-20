@@ -3,9 +3,9 @@
 ## Developers: M Teresa Seoane Pillado & Miguel Angel Rodriguez Muinos
 ## Contact: mail [at] leugimsan.es
 ## From: A Coruna, Spain
-## Version: 1.0
+## Version: 3.0
 ## creation Date: 2013/02/13
-## Last Version Date: 2013/08/08
+## Last Version Date: 2024/08/20
 #########################################################################
 
 # require(XLConnect)
@@ -150,7 +150,7 @@ for (registro in 1:num_regs)
   if (tas>=160){t5<-1}
 
   if (sexo==0){
-	l=0.04826*edad-0.65945*col1+0*col2+0.17692*col3+0.50539*col4+0.65713*col5+0.49744*hdl1+0.24310*hdl2+0*hdl3-0.05107*hdl4-0.48660*hdl5-0.00226*t1+0*t2+0.28320*t3+0.52168*t4+0.61859*t5+0.42839*diabetes+0.52337*fuma
+	l=0.04826*edad-0.65945*col1+0*col2+0.17692*col3+0.50539*col4+0.65713*col5+0.49744*hdl1+0.24310*hdl2+0*hdl3-0.05107*hdl4-0.48660*hdl5+0.00226*t1+0*t2+0.28320*t3+0.52168*t4+0.61859*t5+0.42839*diabetes+0.52337*fuma
   }
   if (sexo==1){
 	l=0.33766*edad-0.00268*(edad^2)-0.26138*col1+0*col2+0.20771*col3+0.24385*col4+0.53513*col5+0.84312*hdl1+0.37796*hdl2+0.19785*hdl3+0*hdl4-0.42951*hdl5-0.053363*t1+0*t2-0.06773*t3+0.26288*t4+0.46573*t5+0.59626*diabetes+0.29246*fuma
@@ -463,7 +463,7 @@ for (registro in 1:num_regs)
   if (tas>=160){t5<-1}
 
   if (sexo==0){
-	l=0.04826*edad-0.65945*col1+0*col2+0.17692*col3+0.50539*col4+0.65713*col5+0.49744*hdl1+0.24310*hdl2+0*hdl3-0.05107*hdl4-0.48660*hdl5-0.00226*t1+0*t2+0.28320*t3+0.52168*t4+0.61859*t5+0.42839*diabetes+0.52337*fuma
+	l=0.04826*edad-0.65945*col1+0*col2+0.17692*col3+0.50539*col4+0.65713*col5+0.49744*hdl1+0.24310*hdl2+0*hdl3-0.05107*hdl4-0.48660*hdl5+0.00226*t1+0*t2+0.28320*t3+0.52168*t4+0.61859*t5+0.42839*diabetes+0.52337*fuma
   }
   if (sexo==1){
 	l=0.33766*edad-0.00268*(edad^2)-0.26138*col1+0*col2+0.20771*col3+0.24385*col4+0.53513*col5+0.84312*hdl1+0.37796*hdl2+0.19785*hdl3+0*hdl4-0.42951*hdl5-0.53363*t1+0*t2-0.06773*t3+0.26288*t4+0.46573*t5+0.59626*diabetes+0.29246*fuma
