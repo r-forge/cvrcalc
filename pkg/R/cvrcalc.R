@@ -9,9 +9,9 @@
 #########################################################################
 
 # require(XLConnect)
-# require(gWidgets)
+# require(gWidgets2)
 # options(guiToolkit="tcltk")
-# require(gWidgetstcltk)
+# require(gWidgets2tcltk)
 
 cvrcalc_gui=function()
 {
