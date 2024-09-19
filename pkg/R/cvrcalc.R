@@ -4,26 +4,26 @@
 ## Contact: mail [at] leugimsan.es
 ## From: A Coruna, Spain
 ## Version: 3.0
-## creation Date: 2013/02/13
-## Last Version Date: 2024/08/20
+## Creation Date: 2013/02/13
+## Last Version Date: 2024/08/24
 #########################################################################
 
-# require(XLConnect)
-# require(gWidgets2)
-# options(guiToolkit="tcltk")
-# require(gWidgets2tcltk)
+library(openxlsx)
+library(gWidgets2)
+options(guiToolkit="tcltk")
+library(gWidgets2tcltk)
 
 cvrcalc_gui=function()
 {
   options(guiToolkit="tcltk")
-  modelos=c("Please, Select a model...", 
-            "Dorica", 
+  modelos=c("Please, Select a model...",
+            "Dorica",
             "Classic Framingham",
             "Framingham-Wilson",
             "Regicor",
             "High Risk Score",
             "Low Risk Score")
-  
+
   win=gwindow("CVR-CALC")
   group=ggroup(horizontal=FALSE, container=win)
   texto=glabel("A Cardiovascular Risk Calculator using estimation by Scores", container=group, font.attr=list(style="bold"))
@@ -31,26 +31,26 @@ cvrcalc_gui=function()
   addSpace(group,15)
   modelo=gcombobox(modelos, container=group)
   addSpring(group)
-  boton=gbutton("Run", container=group, 
+  boton=gbutton("Run", container=group,
                 handler=function(h,...)
                 {eleccion=svalue(modelo)
                  print(eleccion)
-                 if (eleccion==modelos[2]) 
+                 if (eleccion==modelos[2])
                    dorica()
                  else
-                   if (eleccion==modelos[3]) 
+                   if (eleccion==modelos[3])
                      framingham_c()
                  else
-                   if (eleccion==modelos[4]) 
+                   if (eleccion==modelos[4])
                      framingham_w()
                  else
-                   if (eleccion==modelos[5]) 
+                   if (eleccion==modelos[5])
                      regicor()
                  else
-                   if (eleccion==modelos[6]) 
+                   if (eleccion==modelos[6])
                      hrs()
                  else
-                   if (eleccion==modelos[7]) 
+                   if (eleccion==modelos[7])
                      lrs()
                  else
                    print("Please, Select a model.")
@@ -64,23 +64,23 @@ dorica=function()
 #########################################################################
 ## DORICA (FRAMINGHAM, SPAIN CALIBRATED). Programmed, no tables
 ## ref: Aranceta J, Perez Rodrigo C, Foz Sala M, Mantilla T, Serra Majem
-## L, Moreno B, Monereo S, Millan J; 
+## L, Moreno B, Monereo S, Millan J;
 ## Grupo Colaborativo para el estudio DORICA fase 2.
-## [Tables of coronary risk evaluation adapted to the Spanish 
+## [Tables of coronary risk evaluation adapted to the Spanish
 ## population: the DORICA study]
-## Med Clin (Barc). 2004 Nov 20;123(18):686-91. Spanish. 
+## Med Clin (Barc). 2004 Nov 20;123(18):686-91. Spanish.
 ## Erratum in: Med Clin
 ## (Barc). 2004 Dec 4;123(20):30. PubMed PMID: 15563815
 #######################################################################
-  
-file.import=gfile("Please, Select the Excel file with the DATA to import...",filter="*.*")
-wb.datos=loadWorkbook(file.import, create=FALSE)
-misdatos.full=readWorksheet(wb.datos, sheet=1)
-misdatos=na.omit(misdatos.full)
-coloca_reg=data.frame(row.names(misdatos))
-num_regs=dim(misdatos)[1]
-resultados=0
-registro=1
+
+  file.import <- file.choose()
+  misdatos.full <- read.xlsx(file.import, 1)
+  misdatos <- na.omit(misdatos.full)
+  coloca_reg <- data.frame(row.names(misdatos))
+  num_regs <- dim(misdatos)[1]
+  resultados <- 0
+  registro <- 1
+
 for (registro in 1:num_regs)
 {
   sexo=misdatos[registro,1]
@@ -92,18 +92,18 @@ for (registro in 1:num_regs)
   fuma=misdatos[registro,7]
   diabetes=misdatos[registro,8]
   hipertrofia=misdatos[registro,9]
-  
+
   if (colesterol<160)col1<-1 else col1<-0
-  if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0 
-  if (colesterol>=200& colesterol<240)col3<-1 else col3<-0 
-  if (colesterol>=240 & colesterol<280)col4<-1 else col4<-0 
-  if (colesterol>=280)col5<-1 else col5<-0 
-  
+  if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0
+  if (colesterol>=200& colesterol<240)col3<-1 else col3<-0
+  if (colesterol>=240 & colesterol<280)col4<-1 else col4<-0
+  if (colesterol>=280)col5<-1 else col5<-0
+
   if (hdl<35)hdl1<-1 else hdl1<-0
-  if (hdl>=35 & hdl<45)hdl2<-1 else hdl2<-0 
-  if (hdl>=45 & hdl<50)hdl3<-1 else hdl3<-0 
-  if (hdl>=50 & hdl<60)hdl4<-1 else hdl4<-0 
-  if (hdl>=60)hdl5<-1 else hdl5<-0 
+  if (hdl>=35 & hdl<45)hdl2<-1 else hdl2<-0
+  if (hdl>=45 & hdl<50)hdl3<-1 else hdl3<-0
+  if (hdl>=50 & hdl<60)hdl4<-1 else hdl4<-0
+  if (hdl>=60)hdl5<-1 else hdl5<-0
 
   t1<-0
   t2<-0
@@ -114,37 +114,37 @@ for (registro in 1:num_regs)
   if (tas<120  & tad<80)t1<-1 else t1<-0
 
   if (tas<120){
-  if (tad>=80 & tad<85) 
+  if (tad>=80 & tad<85)
   t2<-1 else t2<-0
-  if (tad>=85 & tad<90) 
+  if (tad>=85 & tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=120 & tas<130){
-  if (tad<85) 
+  if (tad<85)
   t2<-1 else t2<-0
-  if (tad>=85 & tad<90) 
+  if (tad>=85 & tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=130 & tas<140){
-  if (tad<90) 
+  if (tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=140 & tas<160){
-  if (tad<100) 
+  if (tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=160){t5<-1}
@@ -181,9 +181,9 @@ lista_pos=data.frame(rep(1:posicion))
 
 matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
 
-wb.result=loadWorkbook(file.import, create=FALSE)
-appendWorksheet(wb.result,matriz_final3,sheet=2,header=TRUE,rownames=FALSE)
-saveWorkbook(wb.result,file.import)
+wb.result <- loadWorkbook(file.import)
+writeDataTable(wb.result, 2, matriz_final3, rowNames = FALSE)
+saveWorkbook(wb.result, file = file.import, overwrite = TRUE)
 
 gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
 }
@@ -193,20 +193,19 @@ framingham_c=function()
 {
 #########################################################################
 ## CLASSIC FRAMINGHAM - Programmed, no tables.
-## Ref: "An updated coronary risk profile. A statement for helth 
+## Ref: "An updated coronary risk profile. A statement for helth
 ## professionals"
 ## KM Anderson, PW Wilson, PM Odell and WB Kannel
 ## Circulation 1991;83;356-362
 #########################################################################
 
-file.import=gfile("Please, Select the Excel file with the DATA to import...",filter="*.*")
-wb.datos=loadWorkbook(file.import, create=FALSE)
-misdatos.full=readWorksheet(wb.datos, sheet=1)
-misdatos=na.omit(misdatos.full)
-coloca_reg=data.frame(row.names(misdatos))
-num_regs=dim(misdatos)[1]
-resultados=0
-registro=1
+file.import <- file.choose()
+misdatos.full <- read.xlsx(file.import, 1)
+misdatos <- na.omit(misdatos.full)
+coloca_reg <- data.frame(row.names(misdatos))
+num_regs <- dim(misdatos)[1]
+resultados <- 0
+registro <- 1
 
 for (registro in 1:num_regs)
 {
@@ -244,9 +243,9 @@ lista_pos=data.frame(rep(1:posicion))
 
 matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
 
-wb.result=loadWorkbook(file.import, create=FALSE)
-appendWorksheet(wb.result,matriz_final3,sheet=2,header=TRUE,rownames=FALSE)
-saveWorkbook(wb.result,file.import)
+wb.result <- loadWorkbook(file.import)
+writeDataTable(wb.result, 2, matriz_final3, rowNames = FALSE)
+saveWorkbook(wb.result, file = file.import, overwrite = TRUE)
 
 gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
 }
@@ -255,22 +254,21 @@ gmessage("End of Process. Please, open de Excel file to view the results.", titl
 framingham_w=function()
 {
 #########################################################################
-## FRAMINGHAM-WILSON  
+## FRAMINGHAM-WILSON
 ## CATEGORIZED FRAMINGHAM (COLESTEROL) - Programmed, no tables.
-## ref: Wilson Peter WF, D'Agostino R, Levy D, Belanger A, 
+## ref: Wilson Peter WF, D'Agostino R, Levy D, Belanger A,
 ## Silbershatz H, Kannel W
 ## Prediction of Coronary Heart Disease Using Risk Factor categories.
 ## Circulation 1998; 97: 1837-47.
 #########################################################################
 
-file.import=gfile("Please, Select the Excel file with the DATA to import...",filter="*.*")
-wb.datos=loadWorkbook(file.import, create=FALSE)
-misdatos.full=readWorksheet(wb.datos, sheet=1)
-misdatos=na.omit(misdatos.full)
-coloca_reg=data.frame(row.names(misdatos))
-num_regs=dim(misdatos)[1]
-resultados=0
-registro=1
+  file.import <- file.choose()
+  misdatos.full <- read.xlsx(file.import, 1)
+  misdatos <- na.omit(misdatos.full)
+  coloca_reg <- data.frame(row.names(misdatos))
+  num_regs <- dim(misdatos)[1]
+  resultados <- 0
+  registro <- 1
 
 for (registro in 1:num_regs)
 {
@@ -283,18 +281,18 @@ for (registro in 1:num_regs)
   fuma=misdatos[registro,7]
   diabetes=misdatos[registro,8]
   hipertrofia=misdatos[registro,9]
-  
+
   if (colesterol<160)col1<-1 else col1<-0
-  if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0 
-  if (colesterol>=200 & colesterol<240)col3<-1 else col3<-0 
-  if (colesterol>=240 & colesterol<280)col4<-1 else col4<-0 
-  if (colesterol>=280)col5<-1 else col5<-0 
+  if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0
+  if (colesterol>=200 & colesterol<240)col3<-1 else col3<-0
+  if (colesterol>=240 & colesterol<280)col4<-1 else col4<-0
+  if (colesterol>=280)col5<-1 else col5<-0
 
   if (hdl<35)hdl1<-1 else hdl1<-0
-  if (hdl>=35 & hdl<45)hdl2<-1 else hdl2<-0 
-  if (hdl>=45 & hdl<50)hdl3<-1 else hdl3<-0 
-  if (hdl>=50 & hdl<60)hdl4<-1 else hdl4<-0 
-  if (hdl>=60)hdl5<-1 else hdl5<-0 
+  if (hdl>=35 & hdl<45)hdl2<-1 else hdl2<-0
+  if (hdl>=45 & hdl<50)hdl3<-1 else hdl3<-0
+  if (hdl>=50 & hdl<60)hdl4<-1 else hdl4<-0
+  if (hdl>=60)hdl5<-1 else hdl5<-0
 
   t1<-0
   t2<-0
@@ -305,37 +303,37 @@ for (registro in 1:num_regs)
   if (tas<120  & tad<80)t1<-1 else t1<-0
 
   if (tas<120){
-  if (tad>=80 & tad<85) 
+  if (tad>=80 & tad<85)
   t2<-1 else t2<-0
-  if (tad>=85 & tad<90) 
+  if (tad>=85 & tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=120 & tas<130){
-  if (tad<85) 
+  if (tad<85)
   t2<-1 else t2<-0
-  if (tad>=85 & tad<90) 
+  if (tad>=85 & tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=130 & tas<140){
-  if (tad<90) 
+  if (tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=140 & tas<160){
-  if (tad<100) 
+  if (tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=160){t5<-1}
@@ -362,16 +360,19 @@ for (registro in 1:num_regs)
   if (edad>=30 && edad<=74) resultados[registro]=p else resultados[registro]=NA
 }
 
-matriz_final=data.frame(coloca_reg,resultados)
-matriz_final2=na.omit(matriz_final)
-posicion=dim(misdatos.full)[1]
-lista_pos=data.frame(rep(1:posicion))
-matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
-wb.result=loadWorkbook(file.import, create=FALSE)
-appendWorksheet(wb.result,matriz_final3,sheet=2,header=TRUE,rownames=FALSE)
-saveWorkbook(wb.result,file.import)
+  matriz_final=data.frame(coloca_reg,resultados)
+  matriz_final2=na.omit(matriz_final)
 
-gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
+  posicion=dim(misdatos.full)[1]
+  lista_pos=data.frame(rep(1:posicion))
+
+  matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
+
+  wb.result <- loadWorkbook(file.import)
+  writeDataTable(wb.result, 2, matriz_final3, rowNames = FALSE)
+  saveWorkbook(wb.result, file = file.import, overwrite = TRUE)
+
+  gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
 }
 
 
@@ -380,19 +381,18 @@ regicor=function()
 #########################################################################
 ## REGICOR (FRAMINGHAM, SPAIN CALIBRATED). Programmed, no tables
 ## ref: Marrugat J, Solanas P, D'Agostino R, et al.
-## Coronary risk estimation in Spain using a calibrated Framingham 
+## Coronary risk estimation in Spain using a calibrated Framingham
 ## function.
 ## Rev Esp Cardiol. 2003 Mar;56(3):253-61. Spanish. PubMed PMID: 12622955
 #########################################################################
 
-file.import=gfile("Please, Select the Excel file with the DATA to import...",filter="*.*")
-wb.datos=loadWorkbook(file.import, create=FALSE)
-misdatos.full=readWorksheet(wb.datos, sheet=1)
-misdatos=na.omit(misdatos.full)
-coloca_reg=data.frame(row.names(misdatos))
-num_regs=dim(misdatos)[1]
-resultados=0
-registro=1
+  file.import <- file.choose()
+  misdatos.full <- read.xlsx(file.import, 1)
+  misdatos <- na.omit(misdatos.full)
+  coloca_reg <- data.frame(row.names(misdatos))
+  num_regs <- dim(misdatos)[1]
+  resultados <- 0
+  registro <- 1
 
 for (registro in 1:num_regs)
 {
@@ -405,18 +405,18 @@ for (registro in 1:num_regs)
   fuma=misdatos[registro,7]
   diabetes=misdatos[registro,8]
   hipertrofia=misdatos[registro,9]
-  
+
   if (colesterol<160)col1<-1 else col1<-0
-  if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0 
-  if (colesterol>=200& colesterol<240)col3<-1 else col3<-0 
-  if (colesterol>=240 & colesterol<280)col4<-1 else col4<-0 
-  if (colesterol>=280)col5<-1 else col5<-0 
+  if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0
+  if (colesterol>=200& colesterol<240)col3<-1 else col3<-0
+  if (colesterol>=240 & colesterol<280)col4<-1 else col4<-0
+  if (colesterol>=280)col5<-1 else col5<-0
 
   if (hdl<35)hdl1<-1 else hdl1<-0
-  if (hdl>=35 & hdl<45)hdl2<-1 else hdl2<-0 
-  if (hdl>=45 & hdl<50)hdl3<-1 else hdl3<-0 
-  if (hdl>=50 & hdl<60)hdl4<-1 else hdl4<-0 
-  if (hdl>=60)hdl5<-1 else hdl5<-0 
+  if (hdl>=35 & hdl<45)hdl2<-1 else hdl2<-0
+  if (hdl>=45 & hdl<50)hdl3<-1 else hdl3<-0
+  if (hdl>=50 & hdl<60)hdl4<-1 else hdl4<-0
+  if (hdl>=60)hdl5<-1 else hdl5<-0
 
   t1<-0
   t2<-0
@@ -427,37 +427,37 @@ for (registro in 1:num_regs)
   if (tas<120  & tad<80)t1<-1 else t1<-0
 
   if (tas<120){
-  if (tad>=80 & tad<85) 
+  if (tad>=80 & tad<85)
   t2<-1 else t2<-0
-  if (tad>=85 & tad<90) 
+  if (tad>=85 & tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=120 & tas<130){
-  if (tad<85) 
+  if (tad<85)
   t2<-1 else t2<-0
-  if (tad>=85 & tad<90) 
+  if (tad>=85 & tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=130 & tas<140){
-  if (tad<90) 
+  if (tad<90)
   t3<-1 else t3<-0
-  if (tad>=90 & tad<100) 
+  if (tad>=90 & tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=140 & tas<160){
-  if (tad<100) 
+  if (tad<100)
   t4<-1 else t4<-0
-  if (tad>=100) 
+  if (tad>=100)
   t5<-1 else t5<-0}
 
   if (tas>=160){t5<-1}
@@ -485,16 +485,19 @@ for (registro in 1:num_regs)
   if (edad>=35 && edad<=74) resultados[registro]=p else resultados[registro]=NA
 }
 
-matriz_final=data.frame(coloca_reg,resultados)
-matriz_final2=na.omit(matriz_final)
-posicion=dim(misdatos.full)[1]
-lista_pos=data.frame(rep(1:posicion))
-matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
-wb.result=loadWorkbook(file.import, create=FALSE)
-appendWorksheet(wb.result,matriz_final3,sheet=2,header=TRUE,rownames=FALSE)
-saveWorkbook(wb.result,file.import)
+  matriz_final=data.frame(coloca_reg,resultados)
+  matriz_final2=na.omit(matriz_final)
 
-gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
+  posicion=dim(misdatos.full)[1]
+  lista_pos=data.frame(rep(1:posicion))
+
+  matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
+
+  wb.result <- loadWorkbook(file.import)
+  writeDataTable(wb.result, 2, matriz_final3, rowNames = FALSE)
+  saveWorkbook(wb.result, file = file.import, overwrite = TRUE)
+
+  gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
 }
 
 
@@ -502,23 +505,22 @@ hrs=function()
 {
 #########################################################################
 ## PROYECTO SCORE (RIESGO ALTO)
-## ref: Conroy RM, Py?r?l? K, Fitzgerald AP, Sans S, Menotti A, De 
-## Backer G, De Bacquer D, Ducimeti?re P, Jousilahti P, Keil U, 
-## Nj?lstad I, Oganov RG, Thomsen T, Tunstall-Pedoe H, Tverdal A, 
+## ref: Conroy RM, Py?r?l? K, Fitzgerald AP, Sans S, Menotti A, De
+## Backer G, De Bacquer D, Ducimeti?re P, Jousilahti P, Keil U,
+## Nj?lstad I, Oganov RG, Thomsen T, Tunstall-Pedoe H, Tverdal A,
 ## Wedel H, Whincup P, Wilhelmsen L, Graham IM; SCORE	project group.
-## Estimation of ten-year risk of fatal cardiovascular disease in 
-## Europe: the SCORE project. Eur Heart J. 2003 Jun;24(11):987-1003. 
+## Estimation of ten-year risk of fatal cardiovascular disease in
+## Europe: the SCORE project. Eur Heart J. 2003 Jun;24(11):987-1003.
 ## PubMed PMID:12788299.
 #########################################################################
 
-file.import=gfile("Please, Select the Excel file with the DATA to import...",filter="*.*")
-wb.datos=loadWorkbook(file.import, create=FALSE)
-misdatos.full=readWorksheet(wb.datos, sheet=1)
-misdatos=na.omit(misdatos.full)
-coloca_reg=data.frame(row.names(misdatos))
-num_regs=dim(misdatos)[1]
-resultados=0
-registro=1
+  file.import <- file.choose()
+  misdatos.full <- read.xlsx(file.import, 1)
+  misdatos <- na.omit(misdatos.full)
+  coloca_reg <- data.frame(row.names(misdatos))
+  num_regs <- dim(misdatos)[1]
+  resultados <- 0
+  registro <- 1
 
 for (registro in 1:num_regs)
 {
@@ -549,7 +551,7 @@ for (registro in 1:num_regs)
 
   w<-0
   w=0.24*(0.02586*colesterol-6)+0.018*(tas-120)+0.71*(fuma)
-  
+
   s_edad<-0
   s_edad10<-0
 
@@ -602,19 +604,19 @@ for (registro in 1:num_regs)
   if (edad>=35 && edad<=64) resultados[registro]=p else resultados[registro]=NA
 }
 
-matriz_final=data.frame(coloca_reg,resultados)
-matriz_final2=na.omit(matriz_final)
+  matriz_final=data.frame(coloca_reg,resultados)
+  matriz_final2=na.omit(matriz_final)
 
-posicion=dim(misdatos.full)[1]
-lista_pos=data.frame(rep(1:posicion))
+  posicion=dim(misdatos.full)[1]
+  lista_pos=data.frame(rep(1:posicion))
 
-matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
+  matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
 
-wb.result=loadWorkbook(file.import, create=FALSE)
-appendWorksheet(wb.result,matriz_final3,sheet=2,header=TRUE,rownames=FALSE)
-saveWorkbook(wb.result,file.import)
+  wb.result <- loadWorkbook(file.import)
+  writeDataTable(wb.result, 2, matriz_final3, rowNames = FALSE)
+  saveWorkbook(wb.result, file = file.import, overwrite = TRUE)
 
-gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
+  gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
 }
 ### HRS'S END ###
 
@@ -623,23 +625,22 @@ lrs=function()
 {
 #########################################################################
 ## PROYECTO SCORE (RIESGO BAJO)
-## ref: Conroy RM, Py?r?l? K, Fitzgerald AP, Sans S, Menotti A, De 
-## Backer G, De Bacquer D, Ducimeti?re P, Jousilahti P, Keil U, 
-## Nj?lstad I, Oganov RG, Thomsen T, Tunstall-Pedoe H, Tverdal A, 
+## ref: Conroy RM, Py?r?l? K, Fitzgerald AP, Sans S, Menotti A, De
+## Backer G, De Bacquer D, Ducimeti?re P, Jousilahti P, Keil U,
+## Nj?lstad I, Oganov RG, Thomsen T, Tunstall-Pedoe H, Tverdal A,
 ## Wedel H, Whincup P, Wilhelmsen L, Graham IM; SCORE	project group.
-## Estimation of ten-year risk of fatal cardiovascular disease in 
-## Europe: the SCORE project. Eur Heart J. 2003 Jun;24(11):987-1003. 
+## Estimation of ten-year risk of fatal cardiovascular disease in
+## Europe: the SCORE project. Eur Heart J. 2003 Jun;24(11):987-1003.
 ## PubMed PMID:12788299.
 #########################################################################
 
-file.import=gfile("Please, Select the Excel file with the DATA to import...",filter="*.*")
-wb.datos=loadWorkbook(file.import, create=FALSE)
-misdatos.full=readWorksheet(wb.datos, sheet=1)
-misdatos=na.omit(misdatos.full)
-coloca_reg=data.frame(row.names(misdatos))
-num_regs=dim(misdatos)[1]
-resultados=0
-registro=1
+  file.import <- file.choose()
+  misdatos.full <- read.xlsx(file.import, 1)
+  misdatos <- na.omit(misdatos.full)
+  coloca_reg <- data.frame(row.names(misdatos))
+  num_regs <- dim(misdatos)[1]
+  resultados <- 0
+  registro <- 1
 
 for (registro in 1:num_regs)
 {
@@ -723,16 +724,19 @@ for (registro in 1:num_regs)
   if (edad>=35 && edad<=64) resultados[registro]=p else resultados[registro]=NA
 }
 
-matriz_final=data.frame(coloca_reg,resultados)
-matriz_final2=na.omit(matriz_final)
-posicion=dim(misdatos.full)[1]
-lista_pos=data.frame(rep(1:posicion))
-matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
-wb.result=loadWorkbook(file.import, create=FALSE)
-appendWorksheet(wb.result,matriz_final3,sheet=2,header=TRUE,rownames=FALSE)
-saveWorkbook(wb.result,file.import)
+  matriz_final=data.frame(coloca_reg,resultados)
+  matriz_final2=na.omit(matriz_final)
 
-gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
+  posicion=dim(misdatos.full)[1]
+  lista_pos=data.frame(rep(1:posicion))
+
+  matriz_final3=merge(lista_pos,matriz_final2,by.x="rep.1.posicion.",by.y="row.names.misdatos.",all="TRUE")
+
+  wb.result <- loadWorkbook(file.import)
+  writeDataTable(wb.result, 2, matriz_final3, rowNames = FALSE)
+  saveWorkbook(wb.result, file = file.import, overwrite = TRUE)
+
+  gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
 }
 ### LRS'S END ###
 
