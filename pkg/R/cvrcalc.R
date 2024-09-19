@@ -91,7 +91,6 @@ for (registro in 1:num_regs)
   tad=misdatos[registro,6]
   fuma=misdatos[registro,7]
   diabetes=misdatos[registro,8]
-  hipertrofia=misdatos[registro,9]
 
   if (colesterol<160)col1<-1 else col1<-0
   if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0
@@ -214,10 +213,9 @@ for (registro in 1:num_regs)
   colesterol=misdatos[registro,3]
   hdl=misdatos[registro,4]
   tas=misdatos[registro,5]
-  tad=misdatos[registro,6]
-  fuma=misdatos[registro,7]
-  diabetes=misdatos[registro,8]
-  hipertrofia=misdatos[registro,9]
+  fuma=misdatos[registro,6]
+  diabetes=misdatos[registro,7]
+  hipertrofia=misdatos[registro,8]
 
   a<-11.1122-0.9119*log(tas)-0.2767*(fuma)-0.7181*log(colesterol/hdl)-0.5865*(hipertrofia)
 
@@ -280,7 +278,6 @@ for (registro in 1:num_regs)
   tad=misdatos[registro,6]
   fuma=misdatos[registro,7]
   diabetes=misdatos[registro,8]
-  hipertrofia=misdatos[registro,9]
 
   if (colesterol<160)col1<-1 else col1<-0
   if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0
@@ -404,7 +401,6 @@ for (registro in 1:num_regs)
   tad=misdatos[registro,6]
   fuma=misdatos[registro,7]
   diabetes=misdatos[registro,8]
-  hipertrofia=misdatos[registro,9]
 
   if (colesterol<160)col1<-1 else col1<-0
   if (colesterol>=160 & colesterol<200)col2<-1 else col2<-0
@@ -527,12 +523,8 @@ for (registro in 1:num_regs)
   sexo=misdatos[registro,1]
   edad=misdatos[registro,2]
   colesterol=misdatos[registro,3]
-  hdl=misdatos[registro,4]
-  tas=misdatos[registro,5]
-  tad=misdatos[registro,6]
-  fuma=misdatos[registro,7]
-  diabetes=misdatos[registro,8]
-  hipertrofia=misdatos[registro,9]
+  tas=misdatos[registro,4]
+  fuma=misdatos[registro,5]
 
   s0_edad<-0
   s0_edad10<-0
@@ -647,12 +639,8 @@ for (registro in 1:num_regs)
   sexo=misdatos[registro,1]
   edad=misdatos[registro,2]
   colesterol=misdatos[registro,3]
-  hdl=misdatos[registro,4]
-  tas=misdatos[registro,5]
-  tad=misdatos[registro,6]
-  fuma=misdatos[registro,7]
-  diabetes=misdatos[registro,8]
-  hipertrofia=misdatos[registro,9]
+  tas=misdatos[registro,4]
+  fuma=misdatos[registro,5]
 
   s0_edad<-0
   s0_edad10<-0

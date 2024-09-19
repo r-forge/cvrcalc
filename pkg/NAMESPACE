@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
 
-import(XLConnect)
+import(openxlsx)
 import(gWidgets2)
 import(gWidgets2tcltk)
