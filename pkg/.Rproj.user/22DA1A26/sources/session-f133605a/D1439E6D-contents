@@ -610,9 +610,8 @@ for (registro in 1:num_regs)
 
   gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
 }
-### HRS'S END ###
 
-### LOW RISK SCORE ###
+
 lrs=function()
 {
 #########################################################################
@@ -726,11 +725,5 @@ for (registro in 1:num_regs)
 
   gmessage("End of Process. Please, open de Excel file to view the results.", title="OK")
 }
-### LRS'S END ###
-
-
-
-
-
-
+### END ###
 

@@ -3,7 +3,7 @@
     "path": "D:/OneDrive/DXSP/R/cvrcalc/cvrcalc/pkg/R/cvrcalc.R",
     "project_path": "R/cvrcalc.R",
     "type": "r_source",
-    "hash": "1500860295",
+    "hash": "746325004",
     "contents": "",
     "dirty": false,
     "created": 1724194085897.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "18,3",
-        "scrollLine": "0"
+        "cursorPosition": "729,0",
+        "scrollLine": "704"
     },
     "folds": "",
-    "lastKnownWriteTime": 1726740777,
+    "lastKnownWriteTime": 1726743211,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1726740777424,
+    "last_content_update": 1726743211520,
     "read_only": false,
     "read_only_alternatives": []
 }
