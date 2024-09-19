@@ -8,10 +8,10 @@
 ## Last Version Date: 2024/09/19
 #########################################################################
 
-library(openxlsx)
-library(gWidgets2)
-options(guiToolkit="tcltk")
-library(gWidgets2tcltk)
+# library(openxlsx)
+# library(gWidgets2)
+# options(guiToolkit="tcltk")
+# library(gWidgets2tcltk)
 
 cvrcalc_gui=function()
 {
